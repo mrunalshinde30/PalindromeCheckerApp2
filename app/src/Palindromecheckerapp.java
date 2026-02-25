@@ -1,3 +1,5 @@
+import java.util.Scanner;
+import java.util.Stack;
 public class Palindromecheckerapp {
     public static void main(String[] args) {
 
@@ -6,20 +8,29 @@ public class Palindromecheckerapp {
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        String reversed = "";
+        Stack<Character> stack = new Stack<>();
 
-        // Reverse the string
-        for (int i = input.length() - 1; i >= 0; i--) {
-            reversed = reversed + input.charAt(i);
+        // Push all characters into stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
         }
 
-        // Compare
-        if (input.equals(reversed)) {
-            System.out.println("It is a Palindrome.");
+        boolean isPalindrome = true;
+
+        // Compare by popping from stack
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                isPalindrome = false;
+                break;
+            }
+        }
+
+        if (isPalindrome) {
+            System.out.println("Is Palindrome? : true");
         } else {
-            System.out.println("It is NOT a Palindrome.");
+            System.out.println("Is Palindrome? : false");
         }
 
         sc.close();
-    }git
+    }
 }

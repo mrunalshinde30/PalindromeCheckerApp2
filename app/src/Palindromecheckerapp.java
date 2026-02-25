@@ -14,22 +14,7 @@ public class Palindromecheckerapp {
         System.out.print("Enter a string: ");
         String input = sc.nextLine();
 
-        LinkedList<Character> list = new LinkedList<>();
-
-        // Add characters to LinkedList
-        for (char c : input.toCharArray()) {
-            list.add(c);
-        }
-
-        boolean isPalindrome = true;
-
-        // Compare from both ends
-        while (list.size() > 1) {
-            if (!list.removeFirst().equals(list.removeLast())) {
-                isPalindrome = false;
-                break;
-            }
-        }
+        boolean isPalindrome = check(input, 0, input.length() - 1);
 
         if (isPalindrome) {
             System.out.println("Is Palindrome? : true");
@@ -38,5 +23,24 @@ public class Palindromecheckerapp {
         }
 
         sc.close();
+    }
+
+    /**
+     * Recursively checks whether a string is palindrome.
+     */
+    private static boolean check(String s, int start, int end) {
+
+        // Base case: if pointers cross or meet
+        if (start >= end) {
+            return true;
+        }
+
+        // If mismatch found
+        if (s.charAt(start) != s.charAt(end)) {
+            return false;
+        }
+
+        // Recursive call moving inward
+        return check(s, start + 1, end - 1);
     }
 }

@@ -11,36 +11,41 @@ public class Palindromecheckerapp {
 
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Enter a string: ");
+        System.out.print("Enter input: ");
         String input = sc.nextLine();
 
-        boolean isPalindrome = check(input, 0, input.length() - 1);
+        // Start time
+        long startTime = System.nanoTime();
 
-        if (isPalindrome) {
-            System.out.println("Is Palindrome? : true");
-        } else {
-            System.out.println("Is Palindrome? : false");
-        }
+        boolean isPalindrome = checkPalindrome(input);
+
+        // End time
+        long endTime = System.nanoTime();
+
+        long executionTime = endTime - startTime;
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + isPalindrome);
+        System.out.println("Execution Time : " + executionTime + " ns");
 
         sc.close();
     }
 
-    /**
-     * Recursively checks whether a string is palindrome.
-     */
-    private static boolean check(String s, int start, int end) {
+    public static boolean checkPalindrome(String input) {
 
-        // Base case: if pointers cross or meet
-        if (start >= end) {
-            return true;
+        int start = 0;
+        int end = input.length() - 1;
+
+        while (start < end) {
+
+            if (input.charAt(start) != input.charAt(end)) {
+                return false;
+            }
+
+            start++;
+            end--;
         }
 
-        // If mismatch found
-        if (s.charAt(start) != s.charAt(end)) {
-            return false;
-        }
-
-        // Recursive call moving inward
-        return check(s, start + 1, end - 1);
+        return true;
     }
 }
